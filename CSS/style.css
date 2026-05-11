@@ -1,0 +1,25 @@
+h1{
+    color: red;
+}
+
+nav{
+    background-color: black;
+    text-align: center;
+}
+
+nav a{
+    color: white;
+    margin: 2%;
+}
+
+.container{
+    background-color: aqua;
+}
+
+.container div{
+    color: rgb(255, 0, 0);
+}
+
+.div1{
+    background-color:cornsilk;
+}
