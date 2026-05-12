@@ -101,3 +101,23 @@ button {
 button:hover{
     background: rgb(14, 187, 14);
 }
+
+table, th, td{
+    border: 1px solid black;
+}
+
+table{
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: center;
+    padding: 10px;
+}
+
+th{
+    background: rgb(149, 146, 146);
+    color: white
+}
