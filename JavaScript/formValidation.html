@@ -40,9 +40,15 @@
                 let name = document.getElementById("name").value;
                 let email = document.getElementById("email").value;
                 let password = document.getElementById("pass").value;
+                let pattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$&!?])(?=.*\d).{8,}$/
 
                 if(name == "" || email == "" || password == ""){
                     alert("All Fields Requiered");
+                    return false;
+                }
+
+                if(!pattern.test(password)){
+                    alert("Password Must Contain Atleast 1 Capital Letter, 1 Small Letter, 1 Special Character, 1 Digit and minimum 8 length");
                     return false;
                 }
 
