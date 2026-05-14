@@ -64,8 +64,103 @@ let heading = document.getElementById("welcomeMessage");
 if(heading){
     // first get the user details
     let user = JSON.parse(localStorage.getItem("user"));
+    let isLoggedIn = localStorage.getItem("isLoggedIn");
     // if the user exists then change the welcom message
-    if(user){
+    if(user && isLoggedIn == "true"){
         heading.innerHTML = "Welcome " + user.name + "!";
     }
+}
+
+// Protecting the Tasks.html from opening without log in
+let currentPage = window.location.pathname;
+
+if(currentPage.includes("tasks.html")){
+    let loginStatus = localStorage.getItem("isLoggedIn");
+
+    if(loginStatus != "true"){
+        alert("Please Log In First!")
+        window.location.href = "login.html";
+    }
+}
+
+// Logout Btn Logic
+let LogoutButton = document.getElementById("logoutBtn");
+
+if(LogoutButton){
+    LogoutButton.addEventListener("click", function(){
+        localStorage.removeItem("isLoggedIn");
+        alert ("Logged Out Successfully!");
+        window.location.href = "index.html";
+    });
+}
+
+// Dynamic NavBar Logic
+
+let signupLink = document.getElementById("signuplink");
+let loginLink = document.getElementById("loginlink");
+let logoutBtn = document.getElementById("logoutBtn");
+
+// checking if the login is true or false!
+let loginStatus = localStorage.getItem("isLoggedIn");
+
+if(loginStatus == "true"){
+    if(signupLink){
+        signupLink.style.display = "none";
+    }
+    if(loginLink){
+        loginLink.style.display = "none";
+    }
+}else{
+    if(logoutBtn){
+        logoutBtn.style.display = "none";
+    }
+}
+
+// Dynamically adding Tasks in tasks.html
+let addButton = document.getElementById("addTaskBtn")
+
+if(addButton){
+    showTasks();
+    addButton.addEventListener("click", function(){
+        let task = document.getElementById("taskInput").value;
+        if(task == ""){
+            alert("Enter the Task First!");
+            return ;
+        };
+        // find "tasks" key in local storage if not found create empty array
+        let taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
+        taskArray.push(task);
+        localStorage.setItem("tasks", JSON.stringify(taskArray));
+        taskInput.value = "";
+        showTasks();
+    })
+}
+
+function showTasks(){
+    let taskList = document.getElementById("taskList");
+    
+    if(!taskList){
+        return ;
+    }
+
+    taskList.innerHTML = "";
+    let taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    for(let i=0; i<taskArray.length; i++){
+        taskList.innerHTML +=  `
+        <tr>
+            <td>${taskArray[i]}</td>
+            <td>
+                <button onclick="deleteTask(${i})">Delete</button>
+            </td>
+        </tr>
+        `;
+    }
+}
+
+function deleteTask(index){
+    let taskArray = JSON.parse(localStorage.getItem("tasks"));
+    taskArray.splice(index,1);
+    localStorage.setItem("tasks", JSON.stringify(taskArray));
+    showTasks();
 }

@@ -13,32 +13,29 @@
             <a href="index.html">Home</a>
             <a href="register.html">Register</a>
             <a href="tasks.html">Tasks</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="login.html">Login</a>
+            <a href="signup.html" id="signuplink">Sign Up</a>
+            <a href="login.html" id="loginlink">Login</a>
+            <a href="#" id="logoutBtn">Logout</a>
         </nav>
         <section>
             <h3>Daily Tasks</h3>
+
+            <div class="form-box">
+                <label> Add Task</label>
+                <input type="text" id="taskInput">
+                <button id="addTaskBtn">Add Task</button>
+            </div>
+            <br>
             <table>
-                <tr>
-                    <th>Tasks</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>Learn Java</td>
-                    <td>Completed</td>
-                </tr>
-                <tr>
-                    <td>Revise Notes</td>
-                    <td>Pending</td>
-                </tr>
-                <tr>
-                    <td>Learn JavaScript</td>
-                    <td>Pending</td>
-                </tr>
-                <tr>
-                    <td>Learn CSS</td>
-                    <td>Pending</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="taskList">
+                    
+                </tbody>
             </table>
         </section>
         <footer>
